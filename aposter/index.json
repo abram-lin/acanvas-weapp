@@ -1,0 +1,7 @@
+{
+	"component": true,
+  "pageOrientation": "portrait",
+	"usingComponents": {
+		"acanvas": "../acanvas/index"
+	}
+}

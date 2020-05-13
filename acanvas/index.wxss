@@ -1,0 +1,11 @@
+.acanvas {
+	position: fixed;
+	bottom: 0;
+	top: 50px;
+	left: -9999px;
+	background-color: transparent;
+}
+
+.debug {
+	left: 0;
+}

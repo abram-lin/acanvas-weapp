@@ -1,0 +1,16 @@
+.gen-btn {
+	width: 600rpx;
+	height: 88rpx;
+	box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.2);
+	border-radius: 44rpx;
+	background-color: #e34d4b;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-weight: 500;
+	color: rgba(255, 255, 255, 1);
+	font-size: 30rpx;
+	text-align: center;
+	line-height: 88rpx;
+}

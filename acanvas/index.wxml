@@ -1,0 +1,1 @@
+<canvas type="2d" id="acanvasid" class="acanvas {{ debug ? 'debug' : ''}}" style="width: {{width}}px; height: {{height}}px"></canvas>

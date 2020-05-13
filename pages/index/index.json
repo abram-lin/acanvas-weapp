@@ -1,0 +1,6 @@
+{
+	"navigationStyle": "custom",
+	"usingComponents": {
+		"aposter": "../../aposter/index"
+	}
+}

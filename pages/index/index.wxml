@@ -1,0 +1,2 @@
+<aposter id="aposterid" />
+<view class="gen-btn" bind:tap="genPoster">生成海报</view>

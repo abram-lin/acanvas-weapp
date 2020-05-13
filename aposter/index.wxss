@@ -1,0 +1,93 @@
+.a-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 100%;
+	background-color: rgba(0, 0, 0, .6);
+	z-index: 2000;
+	overflow-y: scroll;
+}
+
+.fade-in {
+	-webkit-animation: fadeIn ease 300ms forwards;
+	animation: fadeIn ease 300ms forwards;
+}
+
+.fade-out {
+	-webkit-animation: fadeOut ease 300ms forwards;
+	animation: fadeOut ease 300ms forwards;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+.dialog {
+	position: absolute;
+	width: 540rpx;
+	top: 60%;
+	left: 50%;
+	transform: translate(-50%, -60%);
+}
+
+.poster {
+	display: block;
+	width: auto;
+	height: 755rpx;
+	margin: 0 atuo;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.btn {
+	height: 90rpx;
+	width: 100%;
+	margin-top: 32rpx;
+	border-radius: 45rpx;
+	line-height: 90rpx;
+	text-align: center;
+	font-weight: 500;
+	color: rgba(255, 255, 255, 1);
+	font-size: 30rpx;
+}
+
+.save-btn {
+	background-color: #fe4d49;
+}
+
+.preview-btn {
+	background-color: #f05712;
+}
+
+.close-btn {
+	display: block;
+	padding: 6px;
+	display: block;
+	position: absolute;
+	top: -70rpx;
+	right: -50rpx;
+}
+
+.close-btn image {
+	display: block;
+	width: 50rpx;
+	height: 50rpx;
+	background-color: #8e8e8d;
+	border-radius: 50%;
+}

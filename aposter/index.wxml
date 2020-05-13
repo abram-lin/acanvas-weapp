@@ -1,0 +1,11 @@
+<acanvas id="acanvasid" debug="{{false}}" />
+<view class="a-overlay {{classess}}" style="{{display?'':'display: none'}}" catch:touchmove="noop" bindanimationend="animationend">
+  <view class="dialog">
+    <image id="dialogPosterId" class="poster" src="{{posterSrc}}" mode="heightFix" bind:tap="previewPoster" />
+    <view class="btn save-btn" bind:tap="savePoster">保存到手机相册</view>
+    <view class="btn preview-btn" bind:tap="previewPoster">预览海报长按分享</view>
+    <view class="close-btn" bind:tap="closeDialog">
+      <image src="../close.png" mode="aspectFill" />
+    </view>
+  </view>
+</view>

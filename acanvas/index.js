@@ -1,4 +1,4 @@
-import qrjs from './qr.js/index';
+import qrjs, { ErrorCorrectLevel } from './qr.js/index';
 /**
  * 字符串转换成 UTF-8
  * @param {String} str 文本内容
@@ -42,33 +42,42 @@ Component({
 	},
 
 	methods: {
-		initCanvas({ width = 10, height = 10, backgroundColor = 'white' }, cb) {
+		initCanvas({ width = 10, height = 10, backgroundColor = 'white' }) {
 			this.clearCtx();
-			this.setData(
-				{
-					width,
-					height
-				},
-				() => {
-					this.createSelectorQuery().select('#acanvasid').fields({ node: true, size: true }).exec((res) => {
-						const canvas = res[0].node;
-						const ctx = canvas.getContext('2d');
-						const dpr = this.systemInfo.pixelRatio;
-						canvas.width = res[0].width * dpr;
-						canvas.height = res[0].height * dpr;
-						ctx.scale(dpr, dpr);
-						this.dpr = dpr;
-						this.canvas = canvas;
-						this.ctx = ctx;
-						this.ctx.save();
-						this.ctx.fillStyle = backgroundColor;
-						this.ctx.fillRect(0, 0, width * dpr, height * dpr);
-						this.ctx.restore();
-						typeof cb === 'function' && cb(width, height);
-						this.triggerEvent('initCanvasComplete');
-					});
-				}
-			);
+			return new Promise((resolve, reject) => {
+				this.setData(
+					{
+						width,
+						height
+					},
+					() => {
+						this.createSelectorQuery()
+							.select('#acanvasid')
+							.fields({ node: true, size: true })
+							.exec((res) => {
+								// Canavas size can not exceed the limit
+								try {
+									const canvas = res[0].node;
+									const ctx = canvas.getContext('2d');
+									const dpr = this.systemInfo.pixelRatio;
+									canvas.width = res[0].width * dpr;
+									canvas.height = res[0].height * dpr;
+									ctx.scale(dpr, dpr);
+									this.dpr = dpr;
+									this.canvas = canvas;
+									this.ctx = ctx;
+									this.ctx.save();
+									this.ctx.fillStyle = backgroundColor;
+									this.ctx.fillRect(0, 0, width * dpr, height * dpr);
+									this.ctx.restore();
+									return resolve({ width, height });
+								} catch (error) {
+									return reject(error);
+								}
+							});
+					}
+				);
+			});
 		},
 		drawRectPx({ ctx = this.ctx, x, y, w, h, r = 0, lw = 1, color = 'black', opacity = 1, fill, clip = false }) {
 			ctx.save();
@@ -359,9 +368,9 @@ Component({
 							resolve(res.tempFilePath);
 							this.clearCtx();
 						},
-						fail: () => {
-							canvas.clearCtx();
-							reject(new Error('Wechat canvasToTempFilePath fail'));
+						fail: (e) => {
+							this.clearCtx();
+							reject(e);
 						}
 					});
 				}, 300);

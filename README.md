@@ -6,6 +6,7 @@ acanvas 组件是对最新的小程序 Canvas 2D组件的封装，采用新版�
 
 aposter 组件使用了 acanvas提供的接口，开箱即用，可生成二维码海报。组件自身支持生成二维码，也支持指定二维码图片（支持本地和在线图片）。
 
+<span style="color: red">注意：请使用真机调试，前微信IDE存在bug，模拟器无法读取生成的临时文件（`http://tmp/wx...`）。Canvas 2d 暂不支持真机远程调试。</span>
 ## 参数解释
 
 - genPoster

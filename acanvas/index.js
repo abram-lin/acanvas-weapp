@@ -241,7 +241,7 @@ Component({
 			y = 0,
 			ctx = this.ctx,
 			tn = -1, // type number
-			eccl = 3, // error correction capacity level
+			eccl = 2, // error correction capacity level
 			w,
 			h,
 			fc = '#000', // front ground color

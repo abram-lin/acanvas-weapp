@@ -59,9 +59,16 @@ Component({
 								try {
 									const canvas = res[0].node;
 									const ctx = canvas.getContext('2d');
-									const dpr = this.systemInfo.pixelRatio;
-									canvas.width = res[0].width * dpr;
-									canvas.height = res[0].height * dpr;
+									let dpr = this.systemInfo.pixelRatio;
+									let cW = res[0].width;
+									let cH = res[0].height;
+									if (this.systemInfo.platform === 'android') {
+										if (dpr * cH >= 2000 || dpr * cW >= 2000) {
+											dpr = 1.5;
+										}
+									}
+									canvas.width = cW * dpr;
+									canvas.height = cH * dpr;
 									ctx.scale(dpr, dpr);
 									this.dpr = dpr;
 									this.canvas = canvas;
@@ -72,6 +79,7 @@ Component({
 									this.ctx.restore();
 									return resolve({ width, height });
 								} catch (error) {
+									console.log(error);
 									return reject(error);
 								}
 							});

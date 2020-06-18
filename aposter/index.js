@@ -93,7 +93,7 @@ Component({
 		savePoster() {
 			wx.getSetting({
 				success: (res) => {
-					if (!res.authSetting['scope.writePhotosAlbum']) {
+					if (res.authSetting['scope.writePhotosAlbum'] === undefined) {
 						wx.authorize({
 							scope: 'scope.writePhotosAlbum',
 							success: () => {
@@ -108,7 +108,9 @@ Component({
 								});
 							}
 						});
-					} else {
+					} else if(res.authSetting['scope.writePhotosAlbum'] === false){
+						wx.openSetting({});
+					}else if(res.authSetting['scope.writePhotosAlbum']){
 						this.savePosterToAlbum();
 					}
 				},

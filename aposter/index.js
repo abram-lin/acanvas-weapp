@@ -86,7 +86,7 @@ Component({
 			if (posterSrc) {
 				wx.previewImage({
 					current: posterSrc,
-					urls: [ posterSrc ]
+					urls: [posterSrc]
 				});
 			}
 		},
@@ -108,14 +108,25 @@ Component({
 								});
 							}
 						});
-					} else if(res.authSetting['scope.writePhotosAlbum'] === false){
-						wx.openSetting({});
-					}else if(res.authSetting['scope.writePhotosAlbum']){
+					} else if (res.authSetting['scope.writePhotosAlbum'] === false) {
+						wx.showModal({
+							title: '提示',
+							content: '请在小程序设置中打开保存相册权限',
+							showCancel: true,
+							cancelText: '取消',
+							confirmText: '去设置',
+							success: (result) => {
+								if (result.confirm) {
+									wx.openSetting({});
+								}
+							}
+						});
+					} else if (res.authSetting['scope.writePhotosAlbum']) {
 						this.savePosterToAlbum();
 					}
 				},
-				fail: () => {},
-				complete: () => {}
+				fail: () => { },
+				complete: () => { }
 			});
 		},
 		savePosterToAlbum() {
@@ -137,7 +148,7 @@ Component({
 						mask: false
 					});
 				},
-				complete: () => {}
+				complete: () => { }
 			});
 		},
 		genPoster(config) {
@@ -377,6 +388,6 @@ Component({
 				});
 			}
 		},
-		noop() {}
+		noop() { }
 	}
 });
